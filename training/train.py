@@ -5,6 +5,8 @@ The agent modifies this file to improve val_accuracy.
 Runs in a fixed 60-second time budget (wall clock).
 
 Metric: val_accuracy (higher is better)
+
+NOTE: Always preserve the mlflow logging section at the end of this file.
 """
 
 import time
@@ -13,6 +15,7 @@ from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import xgboost as xgb
+import mlflow
 
 # ── Time Budget ───────────────────────────────────────────────────
 TIME_BUDGET = 60  # seconds
@@ -93,3 +96,23 @@ print(f"max_depth:        {PARAMS['max_depth']}")
 print(f"learning_rate:    {PARAMS['learning_rate']}")
 print(f"n_samples:        {N_SAMPLES}")
 print(f"n_features:       {N_FEATURES}")
+
+# ── MLflow Logging (DO NOT REMOVE) ────────────────────────────────
+mlflow.log_metrics({
+    "val_accuracy": val_accuracy,
+    "train_accuracy": train_accuracy,
+    "training_seconds": t_train,
+})
+mlflow.log_params({
+    "n_estimators": PARAMS["n_estimators"],
+    "max_depth": PARAMS["max_depth"],
+    "learning_rate": PARAMS["learning_rate"],
+    "subsample": PARAMS["subsample"],
+    "colsample_bytree": PARAMS["colsample_bytree"],
+    "min_child_weight": PARAMS["min_child_weight"],
+    "gamma": PARAMS["gamma"],
+    "reg_alpha": PARAMS["reg_alpha"],
+    "reg_lambda": PARAMS["reg_lambda"],
+    "n_samples": N_SAMPLES,
+    "n_features": N_FEATURES,
+})
