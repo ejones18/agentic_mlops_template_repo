@@ -43,7 +43,7 @@ PARAMS = {
     "n_estimators": 500,
     "subsample": 0.8,
     "colsample_bytree": 0.8,
-    "min_child_weight": 3,
+    "min_child_weight": 5,
     "gamma": 0.1,
     "reg_alpha": 0.01,
     "reg_lambda": 1.0,
