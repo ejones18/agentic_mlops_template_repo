@@ -1,14 +1,3 @@
-"""
-AutoResearch training script — XGBoost classifier on synthetic tabular data.
-
-The agent modifies this file to improve val_accuracy.
-Runs in a fixed 60-second time budget (wall clock).
-
-Metric: val_accuracy (higher is better)
-
-NOTE: Always preserve the mlflow logging section at the end of this file.
-"""
-
 import time
 import numpy as np
 from sklearn.datasets import make_classification
@@ -51,7 +40,7 @@ PARAMS = {
     "tree_method": "hist",
     "max_depth": 6,
     "learning_rate": 0.1,
-    "n_estimators": 300,
+    "n_estimators": 500,
     "subsample": 0.8,
     "colsample_bytree": 0.8,
     "min_child_weight": 3,
